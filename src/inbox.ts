@@ -7,12 +7,12 @@ export class InboxClient {
   /**
    * Create a new inBox client.
    * @param options - The configuration options
-   * @param options.userToken - The user token for the inBox API, or complete API URL starting with @
+   * @param options.userToken - The user token for the inBox API, or complete API URL
    */
   constructor({ userToken }: { userToken: string }) {
-    if (userToken.startsWith('@')) {
-      // 如果以@开头，直接使用后面的URL
-      this.apiUrl = userToken.substring(1);
+    // 如果是完整的 URL（包含 http:// 或 https://），直接使用
+    if (userToken.startsWith('http://') || userToken.startsWith('https://')) {
+      this.apiUrl = userToken;
     } else {
       // 否则使用默认域名和token拼接
       this.apiUrl = `https://app.gudong.site/api/inbox/${userToken}`;

@@ -97,7 +97,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       if (!userToken) {
         throw new Error("inBox token or URL not set. Please provide it via:\n" +
           "1. Token format: --inbox_user_token=your_token\n" +
-          "2. URL format: --inbox_user_token=@https://inbox.gudong.site/api/inbox/your_token");
+          "2. URL format: --inbox_user_token=https://inbox.gudong.site/api/inbox/your_token");
       }
 
       // 创建inBox客户端并写入笔记

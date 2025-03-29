@@ -4,29 +4,44 @@
   "description": "MCP服务对接inBox笔记API，实现对话形式创建笔记功能",
   "private": false,
   "type": "module",
-  "homepage": "https://github.com/username/mcp-server-inbox",
+  "homepage": "https://github.com/maoruibin/mcp-server-inbox",
   "repository": {
     "type": "git",
-    "url": "https://github.com/username/mcp-server-inbox.git"
+    "url": "https://github.com/maoruibin/mcp-server-inbox.git"
+  },
+  "author": {
+    "name": "gudong",
+    "email": "gudong.site@gmail.com",
+    "url": "https://gudong.site"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maoruibin/mcp-server-inbox/issues"
   },
   "bin": {
     "mcp-server-inbox": "./build/index.js"
   },
   "files": [
-    "build"
+    "build",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
     "prepare": "npm run build",
     "watch": "tsc --watch",
     "inspector": "npx @modelcontextprotocol/inspector build/index.js",
-    "start": "node build/index.js"
+    "start": "node build/index.js",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "mcp",
     "inbox",
     "notes",
-    "api"
+    "api",
+    "cursor",
+    "ai",
+    "note-taking"
   ],
   "dependencies": {
     "@modelcontextprotocol/sdk": "0.6.0"
@@ -34,5 +49,8 @@
   "devDependencies": {
     "@types/node": "^20.11.24",
     "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

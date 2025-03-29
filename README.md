@@ -8,13 +8,12 @@ MCP服务对接inBox笔记API，实现在任意 MCP 客户端以对话形式创�
 - 提供 MCP 服务发现接口
 - 支持通过 MCP 客户端创建笔记
 - 支持设置笔记标题（可选）
-- 支持两种 API 配置方式：Token 和完整 URL
 - 支持 Inspector 调试工具
 
 ## 前置条件
 
 - Node.js 18+
-- inBox 笔记 API Token (PRO 功能)
+- inBox 笔记 API (PRO 功能)
 - 支持 MCP 协议的客户端（如 Cursor AI）
 
 ## 安装与使用
@@ -24,7 +23,7 @@ MCP服务对接inBox笔记API，实现在任意 MCP 客户端以对话形式创�
 1. 克隆代码仓库
 
 ```bash
-git clone https://github.com/username/mcp-server-inbox.git
+git clone https://github.com/maoruibin/mcp-server-inbox.git
 cd mcp-server-inbox
 ```
 
@@ -43,27 +42,21 @@ npm run build
 4. 运行服务
 
 ```bash
-# 方式1：使用 Token 方式
-node build/index.js --inbox_user_token=your_user_token_here
+# 运行服务
+node build/index.js --inbox_user_token=https://inbox.gudong.site/api/inbox/your_token_here
 
-# 方式2：使用完整 URL 方式（推荐）
-node build/index.js --inbox_user_token=@https://inbox.gudong.site/api/inbox/your_token_here
-
-# 方式3：使用环境变量（支持以上两种格式）
-INBOX_USER_TOKEN=your_user_token_here node build/index.js
+# 使用环境变量
+INBOX_USER_TOKEN=https://inbox.gudong.site/api/inbox/your_token_here node build/index.js
 ```
 
 ### 方法二：使用 npx 运行
 
 ```bash
-# 使用 Token 方式
-npx mcp-server-inbox --inbox_user_token=your_user_token_here
-
-# 使用完整 URL 方式（推荐）
-npx mcp-server-inbox --inbox_user_token=@https://inbox.gudong.site/api/inbox/your_token_here
+# 运行服务
+npx mcp-server-inbox --inbox_user_token=https://inbox.gudong.site/api/inbox/your_token_here
 
 # 使用环境变量
-INBOX_USER_TOKEN=your_user_token_here npx mcp-server-inbox
+INBOX_USER_TOKEN=https://inbox.gudong.site/api/inbox/your_token_here npx mcp-server-inbox
 ```
 
 ## 调试与开发
@@ -94,9 +87,7 @@ npm run inspector
         "/path/to/mcp-server-inbox/build/index.js"
       ],
       "env": {
-        "INBOX_USER_TOKEN": "your_user_token_here"
-        // 或者使用完整 URL 格式
-        // "INBOX_USER_TOKEN": "@https://inbox.gudong.site/api/inbox/your_token_here"
+        "INBOX_USER_TOKEN": "https://inbox.gudong.site/api/inbox/your_token_here"
       }
     }
   }
@@ -127,6 +118,42 @@ npm run inspector
   - 成功：返回包含成功信息的对象
   - 失败：抛出相应的错误信息
 
+### inBox API 说明
+
+本项目依赖 inBox 的 API 服务，具体说明如下：
+
+#### 接口信息
+- **接口地址**：`https://app.gudong.site/api/inbox/${userToken}`
+- **请求方式**：`POST`
+- **Content-Type**：`application/json`
+- **请求频率**：每天最多 50 条
+
+#### 请求参数
+
+| 参数      | 类型   | 是否必填 | 说明                |
+|---------|------|------|-------------------|
+| content | 字符串  | 是    | 笔记内容，最多 3000 字符  |
+
+#### 响应格式
+```json
+{
+  "code": 0,
+  "msg": "已提交，请打开inBox查看笔记"
+}
+```
+> 说明：code 为 0 表示请求成功，非零状态均为失败
+
+#### 图片支持
+inBox API 支持解析 Markdown 格式的图片标签。您可以在笔记内容中添加 markdown 格式的图片链接，例如：
+
+```markdown
+今天天气很好，![](https://example.com/image.jpg)
+```
+
+> 注意：API 不支持直接上传图片，需要先将图片上传到图床后使用图片链接
+
+更多 API 详细信息请参考：[inBox API 文档](https://doc.gudong.site/inbox/api.html)
+
 ## 处理逻辑
 
 当用户通过 MCP 客户端发送创建笔记的请求时，服务会根据以下逻辑处理：
@@ -143,11 +170,11 @@ npm run inspector
 - 笔记内容最多支持 3000 字符
 - 需要 inBox PRO 用户才能使用 API 功能
 
-## 获取 inBox API Token
+## 获取 inBox API 配置
 
 1. 打开 inBox 应用
 2. 进入【设置】->【账户】->【Api】
-3. 复制您的专属 API Token
+3. 获取您的专属 API 配置信息
 
 ## 贡献指南
 
@@ -165,10 +192,6 @@ npm run inspector
 - 支持 Token 和完整 URL 两种配置方式
 - 添加 Inspector 调试工具支持
 
-## 许可证
-
-MIT
-
 ## 作者
 
 gudong - [个人主页](https://gudong.site)
@@ -177,3 +200,7 @@ gudong - [个人主页](https://gudong.site)
 
 - [inBox](https://inbox.gudong.site) - 简单好用的笔记服务
 - [MCP Protocol](https://github.com/ModelContextProtocol/specification) - Model Context Protocol 规范
+
+## 许可证
+
+MIT

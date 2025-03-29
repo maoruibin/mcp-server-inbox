@@ -1,6 +1,6 @@
 # MCP-Server-Inbox
 
-MCP服务对接inBox笔记API，实现在任意 MCP 客户端以对话形式创建笔记的功能。
+MCP 服务对接 [inBox 笔记](https://doc.gudong.site/inbox/) API，实现在任意 MCP 客户端以对话形式创建笔记的功能。
 
 ## 功能介绍
 
@@ -18,7 +18,17 @@ MCP服务对接inBox笔记API，实现在任意 MCP 客户端以对话形式创�
 
 ## 安装与使用
 
-### 方法一：本地构建
+### 方法一：使用 npx 运行
+
+```bash
+# 运行服务
+npx mcp-server-inbox --inbox_user_token=https://inbox.gudong.site/api/inbox/your_token_here
+
+# 使用环境变量
+INBOX_USER_TOKEN=https://inbox.gudong.site/api/inbox/your_token_here npx mcp-server-inbox
+```
+
+### 方法二：本地构建
 
 1. 克隆代码仓库
 
@@ -49,15 +59,6 @@ node build/index.js --inbox_user_token=https://inbox.gudong.site/api/inbox/your_
 INBOX_USER_TOKEN=https://inbox.gudong.site/api/inbox/your_token_here node build/index.js
 ```
 
-### 方法二：使用 npx 运行
-
-```bash
-# 运行服务
-npx mcp-server-inbox --inbox_user_token=https://inbox.gudong.site/api/inbox/your_token_here
-
-# 使用环境变量
-INBOX_USER_TOKEN=https://inbox.gudong.site/api/inbox/your_token_here npx mcp-server-inbox
-```
 
 ## 调试与开发
 
@@ -82,12 +83,12 @@ npm run inspector
 {
   "mcpServers": {
     "mcp-server-inbox": {
-      "command": "node",
+      "command": "npx",
       "args": [
-        "/path/to/mcp-server-inbox/build/index.js"
+        "mcp-server-inbox"
       ],
       "env": {
-        "INBOX_USER_TOKEN": "https://inbox.gudong.site/api/inbox/your_token_here"
+        "INBOX_USER_TOKEN": "your api path"
       }
     }
   }

@@ -1,0 +1,38 @@
+{
+  "name": "mcp-server-inbox",
+  "version": "0.1.0",
+  "description": "MCP服务对接inBox笔记API，实现对话形式创建笔记功能",
+  "private": false,
+  "type": "module",
+  "homepage": "https://github.com/username/mcp-server-inbox",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/mcp-server-inbox.git"
+  },
+  "bin": {
+    "mcp-server-inbox": "./build/index.js"
+  },
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
+    "prepare": "npm run build",
+    "watch": "tsc --watch",
+    "inspector": "npx @modelcontextprotocol/inspector build/index.js",
+    "start": "node build/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "inbox",
+    "notes",
+    "api"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "0.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "typescript": "^5.3.3"
+  }
+}

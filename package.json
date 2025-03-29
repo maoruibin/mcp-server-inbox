@@ -1,6 +1,6 @@
 {
   "name": "mcp-server-inbox",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "MCP服务对接inBox笔记API，实现对话形式创建笔记功能",
   "private": false,
   "type": "module",

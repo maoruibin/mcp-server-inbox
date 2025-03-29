@@ -132,7 +132,21 @@ npm run inspector
 
 | 参数      | 类型   | 是否必填 | 说明                |
 |---------|------|------|-------------------|
+| title   | 字符串  | 否    | 笔记标题             |
 | content | 字符串  | 是    | 笔记内容，最多 3000 字符  |
+
+#### 使用示例
+
+1. 创建普通笔记：
+```bash
+npx mcp-server-inbox --inbox_user_token=https://inbox.gudong.site/api/inbox/your_token_here
+```
+
+2. 创建带标题的笔记：
+```bash
+# 在对话中指定标题
+"帮我记笔记，标题是「TypeScript学习」：TypeScript 的高级类型包括 Partial、Required、Pick 等"
+```
 
 #### 响应格式
 ```json

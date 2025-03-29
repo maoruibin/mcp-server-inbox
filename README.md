@@ -88,7 +88,7 @@ npm run inspector
         "mcp-server-inbox"
       ],
       "env": {
-        "INBOX_USER_TOKEN": "your api path"
+        "INBOX_USER_TOKEN": "https://inbox.gudong.site/api/inbox/your_token_here"
       }
     }
   }
